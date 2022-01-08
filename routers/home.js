@@ -5,7 +5,7 @@ const homeRouter = Router();
 homeRouter
 
     .get('/', (req, res) => {
-        res.redirect('/children');
+        res.redirect('/child');
     });
 
 module.exports = {
