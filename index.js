@@ -1,6 +1,7 @@
 const express =require("express");
 const methodOverride = require("method-override");
-const hbs = require("express-handlebars");
+const {engine} = require("express-handlebars");
+const {handleError} = require("./utils/errors");
 
 const app = express();
 
@@ -11,7 +12,7 @@ app.use(express.urlencoded({
 app.use(express.static('public'));
 // app.use(express.json()); //Content-type: application/json
 
-app.engine('.hbs', hbs({
+app.engine('.hbs', engine({
     extname: '.hbs',
     // helpers: 'handlebarsHelpers', //Dodatkowe funkcjonalności, które chcemy dodać do handlebars
 }));
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
    res.send('<h1>Hello, world!</h1>');
 });
 
-// app.use(handleError);
+app.use(handleError);
 
 app.listen(3000, 'localhost', () => {
     console.log('Listening on http://localhost:3000');
