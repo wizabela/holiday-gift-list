@@ -17,8 +17,13 @@ app.engine('.hbs', engine({
     // helpers: 'handlebarsHelpers', //Dodatkowe funkcjonalności, które chcemy dodać do handlebars
 }));
 app.set('view engine', '.hbs');
+
 app.get('/', (req, res) => {
-   res.render('children/list');
+    res.redirect('/children');
+});
+
+app.get('/children', (req, res) => {
+    res.render('children/list');
 });
 
 app.use(handleError);
