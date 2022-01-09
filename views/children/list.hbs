@@ -1,6 +1,12 @@
 <h2>Lista dzieci</h2>
 <ul>
     {{#each childrenList}}
-        <li>{{this.name}} {{this.gift}}</li>
+        <li>
+            {{this.name}}
+            <select>
+                <option value="{{this.gift}}">{{this.gift}}</option>
+            </select>
+            <button>Zapisz</button>
+        </li>
     {{/each}}
 </ul>
