@@ -1,17 +1,13 @@
+const {ValidationError} = require("../utils/errors");
+const {v4: uuid} = require("uuid");
+const {pool} = require("../utils/db");
+
 class ChildRecord {
-    static listAll() {
-        return [
-            {
-                id: 'cdbc',
-                name: 'Ania',
-                gift: 'Tamburyn',
-            },
-            {
-                id: 'abcd',
-                name: 'Roman',
-                gift: 'Koparka',
-            },
-        ];
+
+
+    static async listAll() {
+        const [result] = await pool.execute("SELECT * FROM `children` ORDER BY `name` ASC");
+        return result;
     }
 }
 
