@@ -18,7 +18,6 @@ giftRouter
             count: Number(req.body.count),
         };
 
-        // throw new Error('.....')
 
         const newGift = new GiftRecord(data);
         await newGift.insert();

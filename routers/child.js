@@ -6,14 +6,24 @@ const childRouter = Router();
 
 childRouter // wszystkie ścieżki zaczynają się od '/child'
 
-    .get('/', (req, res) => {
-        const childrenList = ChildRecord.listAll();
-        const giftsList = GiftRecord.listAll();
+    .get('/', async (req, res) => {
+        const childrenList = await ChildRecord.listAll();
+        const giftsList = await GiftRecord.listAll();
 
         res.render('children/list', {
             childrenList,
             giftsList,
         });
+    })
+    .post('/', async (req, res) => {
+        const newChild = new ChildRecord(req.body);
+        await newChild.insert();
+
+        res.redirect('/child');
+
+        // res.render('gift/list', {
+        //     giftsList,
+        // });
     });
 
 module.exports = {
