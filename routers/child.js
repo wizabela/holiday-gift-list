@@ -23,7 +23,19 @@ childRouter // wszystkie ścieżki zaczynają się od '/child'
 
         // res.render('gift/list', {
         //     giftsList,
-        // });
+        // })
+
+    })
+    .patch('/gift/:childId', async (req, res) => {
+        const newChild = new ChildRecord(req.body);
+        await newChild.insert();
+
+        res.redirect('/child');
+
+        // res.render('gift/list', {
+        //     giftsList,
+        // })
+
     });
 
 module.exports = {

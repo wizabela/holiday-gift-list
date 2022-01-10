@@ -2,18 +2,20 @@
 <ul>
     {{#each childrenList}}
         <li>
-            <label>
-                {{this.name}}
-                <select>
-                    //dodany if by móc porównać w handlebars(specjalny helper: handlebarsHelpers)
-                    //sprawdzamy, iterujemy w pętli czy this.id(w each ../giftsList - lista prezentów), konkretnie ten jeden prezent ma to samo id jak (tu wychodzimy z małej pętli i wchodzimy do wyżej,czyli "each childrenList" i sprawdzamy czy temu dziecku id się zgadza(../giftId).Jeżeli się zgadza to dodajemy atrybut selected="selected":
-                    <option value="">Brak</option>
-                    {{#each ../giftsList}}
-                        <option value="{{this.id}}" {{#if (equals this.id ../giftId)}}selected="selected"{{/if}}>{{this.name}}</option>
-                    {{/each}}
-                </select>
-            </label>
-            <button>Zapisz</button>
+            <form action="/child/gift/{{this.id}}?_method=PATCH" method="POST">
+                <label>
+                    {{this.name}}
+                    <select name="giftId">
+                        //dodany if by móc porównać w handlebars(specjalny helper: handlebarsHelpers)
+                        //sprawdzamy, iterujemy w pętli czy this.id(w each ../giftsList - lista prezentów), konkretnie ten jeden prezent ma to samo id jak (tu wychodzimy z małej pętli i wchodzimy do wyżej,czyli "each childrenList" i sprawdzamy czy temu dziecku id się zgadza(../giftId).Jeżeli się zgadza to dodajemy atrybut selected="selected":
+                        <option value="">Brak</option>
+                        {{#each ../giftsList}}
+                            <option value="{{this.id}}" {{#if (equals this.id ../giftId)}}selected="selected"{{/if}}>{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+                <button>Zapisz</button>
+            </form>
         </li>
     {{/each}}
 </ul>
