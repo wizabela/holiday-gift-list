@@ -35,12 +35,15 @@ childRouter // wszystkie ścieżki zaczynają się od '/child'
         }
         const gift = req.body.giftId === '' ? null : await GiftRecord.getOne(req.body.giftId);
 
-        console.log(gift);
+        child.giftId = gift === null ? null : gift.id;
+        //to wyżej mozna zapisać po nowemu:
+        // child.giftId = gift?.id ?? null;
 
+        await child.update();
         // const gift = req.body.giftId === '' ? null : results[0]
 
 
-        // res.redirect('/child');
+        res.redirect('/child');
 
         // res.render('gift/list', {
         //     giftsList,
