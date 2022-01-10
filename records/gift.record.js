@@ -37,6 +37,14 @@ class GiftRecord {
         });
         return results.length === 0 ? null : new GiftRecord(results[0]);
     }
+    async countGivenGifts() {
+        //najpierw destrukturyzacja tablicy, pierwszy element pobieramy a potem destrukturyzujemy objekt
+        //uwaga, bo [[{count}]] to tak naprawdę z bazy dostajemy answer[0][0].count
+        const [[{count}]] = await pool.execute("SELECT COUNT(*) AS `count` FROM `children` WHERE `giftId` = :id", {
+            id: this.id,
+        });
+        return count;
+    }
 }
 
 module.exports = {
