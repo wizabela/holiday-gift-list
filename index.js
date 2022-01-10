@@ -7,6 +7,7 @@ const {homeRouter} = require("./routers/home");
 const {childRouter} = require("./routers/child");
 const {giftRouter} = require("./routers/gift");
 require('./utils/db');
+const {handlebarsHelpers} = require("./utils/handlebars-helpers");
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(express.static('public'));
 
 app.engine('.hbs', engine({
     extname: '.hbs',
-    // helpers: 'handlebarsHelpers', //Dodatkowe funkcjonalności, które chcemy dodać do handlebars
+    helpers: 'handlebarsHelpers', //Dodatkowe funkcjonalności, które chcemy dodać do handlebars
 }));
 app.set('view engine', '.hbs');
 
