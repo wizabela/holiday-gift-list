@@ -22,9 +22,17 @@ class ChildRecord {
         });
         return this.id;
     }
+
     static async listAll() {
-        const [result] = await pool.execute("SELECT * FROM `children` ORDER BY `name` ASC");
-        return result;
+        const [results] = await pool.execute("SELECT * FROM `children` ORDER BY `name` ASC");
+        return results;
+    }
+
+    static async getOne(id) {
+        const [results] = await pool.execute("SELECT * FROM `children` WHERE `id` = :id", {
+            id,
+        });
+        return results.length === 0 ? null : results[0];
     }
 }
 
