@@ -36,9 +36,10 @@ childRouter // wszystkie ścieżki zaczynają się od '/child'
         const gift = req.body.giftId === '' ? null : await GiftRecord.getOne(req.body.giftId);
 
         if (gift) {
-            console.log(gift.count, await gift.countGivenGifts());
+            if (gift.count <= await gift.countGivenGifts()) {
+                throw new ValidationError('Tego prezentu jest za mało.');
+            }
         }
-
 
         child.giftId = gift === null ? null : gift.id;
         //to wyżej mozna zapisać po nowemu:
